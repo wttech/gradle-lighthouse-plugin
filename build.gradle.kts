@@ -4,6 +4,8 @@ plugins {
     id("org.jetbrains.kotlin.jvm")
 }
 
+defaultTasks("build")
+
 repositories {
     jcenter()
 }
@@ -11,6 +13,10 @@ repositories {
 dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:${properties["kotlin.version"]}"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.8.8")
+    implementation("commons-io:commons-io:2.6")
+    implementation("com.moowork.gradle:gradle-node-plugin:1.3.1")
+
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 }
