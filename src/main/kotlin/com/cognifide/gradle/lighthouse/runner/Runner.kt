@@ -2,17 +2,17 @@ package com.cognifide.gradle.lighthouse.runner
 
 import com.cognifide.gradle.lighthouse.LighthouseExtension
 import com.cognifide.gradle.lighthouse.Utils
-import com.cognifide.gradle.lighthouse.config.LighthouseConfig
+import com.cognifide.gradle.lighthouse.config.Config
 import com.moowork.gradle.node.yarn.YarnExecRunner
 import java.io.File
 
-class LighthouseRunner(lighthouse: LighthouseExtension) {
+class Runner(lighthouse: LighthouseExtension) {
 
     private var project = lighthouse.project
 
     private var logger = project.logger
 
-    var config: LighthouseConfig = lighthouse.config
+    var config: Config = lighthouse.config
 
     var reportFileRule = lighthouse.reportFileRule
 
@@ -31,10 +31,10 @@ class LighthouseRunner(lighthouse: LighthouseExtension) {
 
             suite.paths.forEach { path ->
                 val url = "$baseUrl$path"
-                val unit = LighthouseUnit(suite, url)
+                val unit = RunUnit(suite, url)
                 val reportFile = reportFileRule(unit)
 
-                run(url, reportFile)
+                run(url, reportFile, suite.args)
             }
         }
     }

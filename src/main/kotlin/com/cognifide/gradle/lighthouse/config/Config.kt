@@ -4,9 +4,9 @@ import com.cognifide.gradle.lighthouse.LighthouseException
 import com.cognifide.gradle.lighthouse.Utils
 import java.io.File
 
-class LighthouseConfig {
+class Config {
 
-    var suites: List<LighthouseSuite> = listOf()
+    var suites: List<Suite> = listOf()
 
     companion object {
 
@@ -15,7 +15,7 @@ class LighthouseConfig {
                 throw LighthouseException("Lighthouse configuration file does not exists: $file!")
             }
 
-            Utils.fromJson(readText(), LighthouseConfig::class.java)
+            Utils.fromJson(readText(), Config::class.java)
         }
     }
 }

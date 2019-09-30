@@ -1,6 +1,6 @@
 package com.cognifide.gradle.lighthouse.config
 
-class LighthouseSuite {
+class Suite {
 
     lateinit var name: String
 
