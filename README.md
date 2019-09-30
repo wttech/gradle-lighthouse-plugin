@@ -2,7 +2,7 @@
 
 [![Gradle Status](https://gradleupdate.appspot.com/Cognifide/gradle-lighthouse-plugin/status.svg?random=123)](https://gradleupdate.appspot.com/Cognifide/gradle-lighthouse-plugin/status)
 ![Travis Build](https://travis-ci.org/Cognifide/gradle-lighthouse-plugin.svg?branch=master)
-[![Apache License, Version 2.0, January 2004](docs/apache-license-badge.svg)](http://www.apache.org/licenses/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 # Gradle Lighthouse Plugin
 
