@@ -23,15 +23,21 @@ gradlePlugin {
 }
 
 val functionalTestSourceSet = sourceSets.create("functionalTest") {}
+val testSourceSet = sourceSets["test"]
 
-gradlePlugin.testSourceSets(functionalTestSourceSet)
+gradlePlugin.testSourceSets(testSourceSet, functionalTestSourceSet)
 configurations.getByName("functionalTestImplementation").extendsFrom(configurations.getByName("testImplementation"))
 
-val functionalTest by tasks.creating(Test::class) {
-    testClassesDirs = functionalTestSourceSet.output.classesDirs
-    classpath = functionalTestSourceSet.runtimeClasspath
+tasks {
+    register<Test>("functionalTest") {
+        testClassesDirs = functionalTestSourceSet.output.classesDirs
+        classpath = functionalTestSourceSet.runtimeClasspath
+    }
+    named<Task>("check") {
+        dependsOn("functionalTest")
+    }
+    withType<Test>().configureEach {
+        testLogging.showStandardStreams = true
+    }
 }
 
-val check by tasks.getting(Task::class) {
-    dependsOn(functionalTest)
-}
