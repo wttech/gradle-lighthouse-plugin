@@ -6,7 +6,7 @@ import com.cognifide.gradle.lighthouse.config.LighthouseConfig
 import com.moowork.gradle.node.yarn.YarnExecRunner
 import java.io.File
 
-class LighthouseRunner(private val lighthouse: LighthouseExtension) {
+class LighthouseRunner(lighthouse: LighthouseExtension) {
 
     private var project = lighthouse.project
 

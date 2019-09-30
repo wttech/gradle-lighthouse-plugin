@@ -5,7 +5,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
 
-class LighthouseRun : DefaultTask() {
+open class LighthouseRun : DefaultTask() {
 
     @Internal
     val lighthouse = LighthouseExtension.get(project)

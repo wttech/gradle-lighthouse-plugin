@@ -4,4 +4,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "gradle-lighthouse-plugin"
+rootProject.name = "lighthouse-plugin"

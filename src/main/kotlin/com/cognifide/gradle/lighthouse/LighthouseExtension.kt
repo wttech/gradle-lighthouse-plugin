@@ -8,17 +8,17 @@ import java.io.File
 
 class LighthouseExtension(val project: Project) {
 
-    var suiteName = project.findProperty("lighthouse.suite") as String?
+    var configFile = project.file(project.findProperty("lighthouse.configFile") as String? ?: "lighthouse/suites.json")
 
-    var suiteConfigFile = project.file("lighthouse/suites.json")
+    val config get() = LighthouseConfig.from(configFile)
+
+    var suiteName = project.findProperty("lighthouse.suite") as String?
 
     var baseUrl = project.findProperty("lighthouse.baseUrl") as String?
 
     var reportFileRule: (LighthouseUnit) -> File = {
         project.file("build/lighthouse/${it.suite.name}/${it.url.substringAfter("://").replace("/", "_")}")
     }
-
-    var config = LighthouseConfig.default(project)
 
     fun <T> runner(consumer: LighthouseRunner.() -> T) = LighthouseRunner(this).run(consumer)
 

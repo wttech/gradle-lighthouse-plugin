@@ -4,7 +4,9 @@ plugins {
     id("org.jetbrains.kotlin.jvm")
 }
 
-defaultTasks("build")
+defaultTasks("build", "publishToMavenLocal")
+group = "com.cognifide.gradle"
+version = "1.0.0-SNAPSHOT"
 
 repositories {
     jcenter()
