@@ -6,7 +6,71 @@
 
 # Gradle Lighthouse Plugin
 
-TODO ...
+Runs [Lighthouse](https://developers.google.com/web/tools/lighthouse) tests on multiple sites / web pages with checking thresholds (useful on continuous integration, constant performance checking).
+
+[![Lighthouse Logo](docs/lighthouse-logo.png)](https://developers.google.com/web/tools/lighthouse)
+
+## Configuration
+
+Plugin organizes multiple sites to be tested into suites. Any web page could have be checked with different threshold and Lighthouse configuration (e.g using [performance budgets](https://developers.google.com/web/tools/lighthouse/audits/budgets)).
+Suites need to be defined in file with following format:
+
+*lighthouse/suites.json* (plugin specific format)
+```json
+{
+  "suites": [
+    {
+      "name": "site.demo",
+      "baseUrl": "http://demo.example.com",
+      "paths": [
+        "/en-us.html",
+        "/en-gb.html"
+      ],
+      "args": [
+        "--config-path=lighthouse/config.json",
+        "--performance=90",
+        "--accessibility=90",
+        "--best-practices=80",
+        "--seo=60",
+        "--pwa=30"
+      ]
+    },
+    {
+      "name": "site.live",
+      "baseUrl": "http://example.com",
+      "paths": [
+        "/en-us.html"
+      ],
+      "args": [
+        "--config-path=lighthouse/config.json",
+        "--performance=90",
+        "--accessibility=90",
+        "--best-practices=80",
+        "--seo=60",
+        "--pwa=30"
+      ]
+    }
+  ]
+}
+```
+
+When using argument `--config-path` then it is also needed to have at least file:
+
+*lighthouse/config.json* ([documentation](https://github.com/GoogleChrome/lighthouse/blob/master/docs/configuration.md#config-extension))
+```json
+{
+  "extends": "lighthouse:default"
+}
+```
+
+### Running
+
+Use command, to run Lighthouse CI by using:
+
+* default suite and its base URL: `sh gradlew lighthouseRun`,
+* only desired suite by name: `sh gradlew lighthouseRun -Plighthouse.suite=site.demo`,
+* only desired suite by base URL: `sh gradlew lighthouseRun -Plighthouse.baseUrl=http://example.com`,
+* any suite with any base URL: `sh gradlew lighthouseRun -Plighthouse.baseUrl=http://any-host.com -Plighthouse.suite=site.live` (base URL defined in suite will be overridden).
 
 ## Building
 
