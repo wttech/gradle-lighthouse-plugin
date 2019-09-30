@@ -5,13 +5,13 @@ import kotlin.test.Test
 import kotlin.test.assertNotNull
 
 
-class LighthousePlugin {
+class LighthousePluginTest {
 
     @Test fun `plugin registers task`() {
         val project = ProjectBuilder.builder().build()
         project.plugins.apply("com.cognifide.lighthouse")
 
-        assertNotNull(project.tasks.findByName("greeting"))
+        assertNotNull(project.tasks.findByName("lighthouseRun"))
     }
 
 }
