@@ -7,6 +7,7 @@ import org.gradle.api.Plugin
 open class LighthousePlugin: Plugin<Project> {
 
     override fun apply(project: Project) {
+        project.plugins.apply("com.moowork.node")
         project.extensions.add("lighthouse", LighthouseExtension(project))
         project.tasks.register("lighthouseRun", LighthouseRun::class.java)
     }
