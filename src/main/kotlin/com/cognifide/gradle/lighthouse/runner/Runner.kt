@@ -2,7 +2,6 @@ package com.cognifide.gradle.lighthouse.runner
 
 import com.cognifide.gradle.lighthouse.LighthouseExtension
 import com.cognifide.gradle.lighthouse.Utils
-import com.cognifide.gradle.lighthouse.config.Config
 import com.moowork.gradle.node.yarn.YarnExecRunner
 import java.io.File
 
@@ -12,7 +11,7 @@ class Runner(lighthouse: LighthouseExtension) {
 
     private var logger = project.logger
 
-    var config: Config = lighthouse.config
+    var config = lighthouse.config
 
     var reportFileRule = lighthouse.reportFileRule
 
