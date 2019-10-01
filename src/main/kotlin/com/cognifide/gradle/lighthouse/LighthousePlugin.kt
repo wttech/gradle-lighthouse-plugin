@@ -12,10 +12,16 @@ open class LighthousePlugin: Plugin<Project> {
     override fun apply(project: Project) {
         project.plugins.apply("com.github.node-gradle.node")
 
-        val yarnInstall = project.tasks.named(YarnInstallTask.NAME, YarnInstallTask::class.java) {
-            val nodeModulesDir = NodeExtension.get(project).nodeModulesDir
+        val node = NodeExtension.get(project)
 
-            File(nodeModulesDir, "package.json").apply {
+        node.apply {
+            version = "10.16.3"
+            yarnVersion = "1.19.0"
+            download = true
+        }
+
+        val yarnInstall = project.tasks.named(YarnInstallTask.NAME, YarnInstallTask::class.java) {
+            File(node.nodeModulesDir, "package.json").apply {
                 if (!exists()) {
                     writeText("""
                         {
