@@ -77,7 +77,7 @@ Note that after running one of above commands first time, new files might be gen
 * *package.json*
 * *yarn.lock*
 
-This is indented behavior - remember to save these files in VCS.
+This is indented behavior - __remember to save these files in VCS__.
 
 ## Building
 
