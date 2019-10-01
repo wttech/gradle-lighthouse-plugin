@@ -4,13 +4,21 @@ plugins {
     id("org.jetbrains.kotlin.jvm")
 }
 
+defaultTasks("build", "publishToMavenLocal")
+group = "com.cognifide.gradle"
+
 repositories {
     jcenter()
+    gradlePluginPortal()
 }
 
 dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:${properties["kotlin.version"]}"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.8.8")
+    implementation("commons-io:commons-io:2.6")
+    implementation("com.github.node-gradle:gradle-node-plugin:2.1.1")
+
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 }

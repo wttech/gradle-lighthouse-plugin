@@ -68,9 +68,16 @@ When using argument `--config-path` then it is also needed to have at least file
 Use command, to run Lighthouse CI by using:
 
 * default suite and its base URL: `sh gradlew lighthouseRun`,
-* only desired suite by name: `sh gradlew lighthouseRun -Plighthouse.suite=site.demo` (if suite by base URL not found, suite named `default` will be used),
+* only desired suite by name: `sh gradlew lighthouseRun -Plighthouse.suite=site.demo` (if suite by name not found, suite named `default` will be used),
 * only desired suite by base URL: `sh gradlew lighthouseRun -Plighthouse.baseUrl=http://example.com`,
 * any suite with any base URL: `sh gradlew lighthouseRun -Plighthouse.baseUrl=http://any-host.com -Plighthouse.suite=site.live` (base URL defined in suite will be overridden).
+
+Note that after running one of above commands first time, new files might be generated:
+
+* *package.json*
+* *yarn.lock*
+
+This is indented behavior - __remember to save these files in VCS__.
 
 ## Building
 
