@@ -19,6 +19,8 @@ class Runner(lighthouse: LighthouseExtension) {
 
     var baseUrl = lighthouse.baseUrl
 
+    var workingDir = lighthouse.workingDir
+
     fun runSuites() {
         when {
             !suiteName.isNullOrBlank() -> config.suites.filter { Utils.wildcardMatch(it.name, suiteName) }
@@ -44,7 +46,7 @@ class Runner(lighthouse: LighthouseExtension) {
 
         reportDir.mkdirs()
         YarnExecRunner(project).apply {
-            workingDir = project.projectDir
+            workingDir = this@Runner.workingDir
             arguments = mutableListOf("lighthouse-ci", url, "--report=$reportDir", "--filename=$reportName") + extraArgs
             execute()
         }

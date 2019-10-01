@@ -14,4 +14,8 @@ open class LighthouseRun : DefaultTask() {
     fun run() {
         lighthouse.runner { runSuites() }
     }
+
+    init {
+        description = "Run Lighthouse performance test suite(s)"
+    }
 }
