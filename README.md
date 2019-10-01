@@ -72,6 +72,13 @@ Use command, to run Lighthouse CI by using:
 * only desired suite by base URL: `sh gradlew lighthouseRun -Plighthouse.baseUrl=http://example.com`,
 * any suite with any base URL: `sh gradlew lighthouseRun -Plighthouse.baseUrl=http://any-host.com -Plighthouse.suite=site.live` (base URL defined in suite will be overridden).
 
+Note that after running one of above commands first time, new files might be generated:
+
+* *package.json*
+* *yarn.lock*
+
+This is indented behavior - remember to save these files in VCS.
+
 ## Building
 
 1. Clone this project using command `git clone https://github.com/Cognifide/gradle-lighthouse-plugin.git`
