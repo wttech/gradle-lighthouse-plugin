@@ -32,9 +32,9 @@ class Runner(lighthouse: LighthouseExtension) {
                     "or when skipping suite name parameter.")
         }.forEach { suite ->
             logger.info("Running Lighthouse Suite '${suite.name}'")
-
             suite.paths.forEach { path ->
-                val url = "$baseUrl$path"
+                val baseUrlOverride = if (baseUrl.isNullOrBlank()) suite.baseUrl else baseUrl
+                val url = "$baseUrlOverride$path"
                 val unit = RunUnit(suite, url)
                 val reportFile = reportFileRule(unit)
 
@@ -44,6 +44,8 @@ class Runner(lighthouse: LighthouseExtension) {
     }
 
     fun run(url: String, reportFile: File, extraArgs: List<String> = listOf()) {
+        logger.info("Running Lighthouse Test '$url'")
+
         val reportDir = reportFile.parentFile
         val reportName = reportFile.name
 
