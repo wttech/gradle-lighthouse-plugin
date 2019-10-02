@@ -74,7 +74,7 @@ When using argument `--config-path` then it is also needed to have at least file
 
 ## Running
 
-Underneath, Gradle Lighthouse Plugin is using running Lighthouse CI multiple times in case of test suites defined. 
+Underneath, Gradle Lighthouse Plugin is using running [Lighthouse CI](https://www.npmjs.com/package/lighthouse-ci) multiple times in case of test suites defined. 
 
 Available options:
 
@@ -89,6 +89,7 @@ Note that after running one of above commands first time, new files might be gen
 * *yarn.lock*
 
 This is indented behavior - __remember to save these files in VCS__.
+If Lighthouse CI tool version need to be upgraded, just correct *package.json* file.
 
 ## Screenshots
 
