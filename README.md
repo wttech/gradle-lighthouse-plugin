@@ -14,7 +14,7 @@ Runs [Lighthouse](https://developers.google.com/web/tools/lighthouse) tests on m
 
 ```kotlin
 plugins {
-  id("com.cognifide.lighthouse") version "1.0.0"
+    id("com.cognifide.lighthouse") version "1.0.0"
 }
 ```
 
