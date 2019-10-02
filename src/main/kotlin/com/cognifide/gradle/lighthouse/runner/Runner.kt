@@ -28,7 +28,7 @@ class Runner(lighthouse: LighthouseExtension) {
             config.suites.filter { it.default }
         }.ifEmpty {
             throw LighthouseException("Cannot determine any Lighthouse test suites to run!\n" +
-                    "Consider setting default flags" +" for some suites for handling any base URL " +
+                    "Consider setting default flags for some suites to handle any base URL " +
                     "or when skipping suite name parameter.")
         }.forEach { suite ->
             logger.info("Running Lighthouse Suite '${suite.name}'")

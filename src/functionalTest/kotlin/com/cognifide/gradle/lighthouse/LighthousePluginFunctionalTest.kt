@@ -25,6 +25,23 @@ class LighthousePluginFunctionalTest {
         assertEquals(result.task(":lighthouseRun")?.outcome, TaskOutcome.SUCCESS)
     }
 
+    @Test
+    fun `can run suite by name`() {
+        // given
+        val projectDir = configureProjectDir()
+
+        // when
+        val runner = GradleRunner.create()
+        runner.forwardOutput()
+        runner.withPluginClasspath()
+        runner.withArguments("lighthouseRun", "-Plighthouse.suite=facebook")
+        runner.withProjectDir(projectDir)
+        val result = runner.build();
+
+        // then
+        assertEquals(result.task(":lighthouseRun")?.outcome, TaskOutcome.SUCCESS)
+    }
+
     private fun configureProjectDir(): File {
         val projectDir = File("build/functionalTest")
 
@@ -52,10 +69,10 @@ class LighthousePluginFunctionalTest {
                       ],
                       "args": [
                         "--config-path=lighthouse/config.json",
-                        "--performance=90",
-                        "--accessibility=90",
+                        "--performance=60",
+                        "--accessibility=70",
                         "--best-practices=80",
-                        "--seo=60",
+                        "--seo=80",
                         "--pwa=30"
                       ]
                     },
@@ -67,8 +84,8 @@ class LighthousePluginFunctionalTest {
                       ],
                       "args": [
                         "--config-path=lighthouse/config.json",
-                        "--performance=90",
-                        "--accessibility=90",
+                        "--performance=75",
+                        "--accessibility=60",
                         "--best-practices=80",
                         "--seo=60",
                         "--pwa=30"
