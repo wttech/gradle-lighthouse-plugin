@@ -91,11 +91,11 @@ Note that after running one of above commands first time, new files might be gen
 This is indented behavior - __remember to save these files in VCS__.
 If Lighthouse CI tool version need to be upgraded, just correct *package.json* file.
 
-## Screenshots
+As a build result, reports under directory *build/lighthouse* will be generated:
 
-As a build result, reports under directory *build/lighthouse* will be generated.
+![Lighthouse Build Files](docs/lighthouse-build-output.png)
 
-Sample report below:
+Screenshot of sample report below:
 
 ![Lighthouse Report](docs/lighthouse-report.png)
 
