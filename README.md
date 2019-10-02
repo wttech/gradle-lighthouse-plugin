@@ -80,7 +80,7 @@ Available options:
 
 * run default suite(s): `sh gradlew lighthouseRun`,
 * run only desired suite(s) by name pattern(s): `sh gradlew lighthouseRun -Plighthouse.suite=site.demo` (if suites by name not found, default suites will be used),
-* run only desired suite(s) by base URL: `sh gradlew lighthouseRun -Plighthouse.baseUrl=http://example.com` (if suites by name not found, default suites will be used),
+* run only desired suite(s) by base URL: `sh gradlew lighthouseRun -Plighthouse.baseUrl=http://example.com` (if suites by base URL not found, default suites will be used),
 * run only desired suite(s) with customized base URL: `sh gradlew lighthouseRun -Plighthouse.baseUrl=http://any-host.com -Plighthouse.suite=site.live`.
 
 Note that after running one of above commands first time, new files might be generated:
