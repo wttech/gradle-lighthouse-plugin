@@ -1,6 +1,4 @@
 import org.jetbrains.dokka.gradle.DokkaTask
-import com.gradle.publish.PluginBundleExtension
-import com.jfrog.bintray.gradle.BintrayExtension
 
 plugins {
     `java-gradle-plugin`
@@ -10,6 +8,7 @@ plugins {
     id("org.jetbrains.dokka")
     id("io.gitlab.arturbosch.detekt")
     id("com.jfrog.bintray")
+    id("net.researchgate.release")
 }
 
 defaultTasks("build", "publishToMavenLocal")
@@ -62,6 +61,12 @@ tasks {
     }
     withType<Test>().configureEach {
         testLogging.showStandardStreams = true
+    }
+    named("afterReleaseBuild") {
+        dependsOn("bintrayUpload", "publishPlugins")
+    }
+    named("updateVersion") {
+        enabled = false
     }
 }
 

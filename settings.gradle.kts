@@ -5,6 +5,7 @@ pluginManagement {
         id("org.jetbrains.dokka") version "${extra["dokka.version"]}"
         id("com.gradle.plugin-publish") version "0.10.1"
         id("com.jfrog.bintray") version "1.8.4"
+        id("net.researchgate.release") version "2.6.0"
     }
 }
 
