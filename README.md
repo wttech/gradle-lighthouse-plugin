@@ -20,7 +20,7 @@ plugins {
 
 ## Configuration
 
-Plugin organizes multiple sites to be tested into suites. Any web page could have be checked with different threshold and Lighthouse configuration (e.g using [performance budgets](https://developers.google.com/web/tools/lighthouse/audits/budgets)).
+Plugin organizes multiple sites to be tested into suites. Any web page could be checked with different threshold and Lighthouse configuration (e.g using [performance budgets](https://developers.google.com/web/tools/lighthouse/audits/budgets)).
 Suites need to be defined in file with following format:
 
 *lighthouse/suites.json* (plugin specific format)
