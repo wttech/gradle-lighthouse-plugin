@@ -1,7 +1,15 @@
+import org.jetbrains.dokka.gradle.DokkaTask
+import com.gradle.publish.PluginBundleExtension
+import com.jfrog.bintray.gradle.BintrayExtension
+
 plugins {
     `java-gradle-plugin`
+    id("com.gradle.plugin-publish")
     id("maven-publish")
     id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.dokka")
+    id("io.gitlab.arturbosch.detekt")
+    id("com.jfrog.bintray")
 }
 
 defaultTasks("build", "publishToMavenLocal")
@@ -21,16 +29,10 @@ dependencies {
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+
+    "detektPlugins"("io.gitlab.arturbosch.detekt:detekt-formatting:${properties["detekt.version"]}")
 }
 
-gradlePlugin {
-    plugins {
-        create("lighthouse") {
-            id = "com.cognifide.lighthouse"
-            implementationClass = "com.cognifide.gradle.lighthouse.LighthousePlugin"
-        }
-    }
-}
 
 val functionalTestSourceSet = sourceSets.create("functionalTest") {}
 gradlePlugin.testSourceSets(functionalTestSourceSet)
@@ -44,8 +46,77 @@ tasks {
     named<Task>("check") {
         dependsOn("functionalTest")
     }
+    register<Jar>("sourcesJar") {
+        archiveClassifier.set("sources")
+        dependsOn("classes")
+        from(sourceSets["main"].allSource)
+    }
+    register<DokkaTask>("dokkaJavadoc") {
+        outputFormat = "javadoc"
+        outputDirectory = "$buildDir/javadoc"
+    }
+    register<Jar>("javadocJar") {
+        archiveClassifier.set("javadoc")
+        dependsOn("dokkaJavadoc")
+        from("$buildDir/javadoc")
+    }
     withType<Test>().configureEach {
         testLogging.showStandardStreams = true
     }
 }
 
+detekt {
+    config.from(file("detekt.yml"))
+    parallel = true
+    autoCorrect = true
+    failFast = true
+}
+
+gradlePlugin {
+    plugins {
+        create("lighthouse") {
+            id = "com.cognifide.lighthouse"
+            implementationClass = "com.cognifide.gradle.lighthouse.LighthousePlugin"
+            displayName = "Lighthouse Plugin"
+            description = "Runs Lighthouse tests on multiple sites / web pages with checking thresholds (useful on continuous integration, constant performance checking)."
+        }
+    }
+}
+
+pluginBundle {
+    website = "https://github.com/Cognifide/gradle-lighthouse-plugin"
+    vcsUrl = "https://github.com/Cognifide/gradle-lighthouse-plugin.git"
+    description = "Gradle Lighthouse Plugin"
+    tags = listOf("lighthouse", "performance", "test", "seo", "pwa")
+}
+
+bintray {
+    user = (project.findProperty("bintray.user") ?: System.getenv("BINTRAY_USER"))?.toString()
+    key = (project.findProperty("bintray.key") ?: System.getenv("BINTRAY_KEY"))?.toString()
+    setPublications("mavenJava")
+    with(pkg) {
+        repo = "maven-public"
+        name = "gradle-lighthouse-plugin"
+        userOrg = "cognifide"
+        setLicenses("Apache-2.0")
+        vcsUrl = "https://github.com/Cognifide/gradle-lighthouse-plugin.git"
+        setLabels("lighthouse", "performance", "test", "seo", "pwa")
+        with(version) {
+            name = project.version.toString()
+            desc = "${project.description} ${project.version}"
+            vcsTag = project.version.toString()
+        }
+    }
+    publish = (project.findProperty("bintray.publish") ?: "true").toString().toBoolean()
+    override = (project.findProperty("bintray.override") ?: "false").toString().toBoolean()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+            artifact(tasks["sourcesJar"])
+            artifact(tasks["javadocJar"])
+        }
+    }
+}
