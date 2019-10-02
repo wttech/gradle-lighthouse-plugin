@@ -72,7 +72,7 @@ When using argument `--config-path` then it is also needed to have at least file
 }
 ```
 
-### Running
+## Running
 
 Underneath, Gradle Lighthouse Plugin is using running Lighthouse CI multiple times in case of test suites defined. 
 
@@ -89,6 +89,14 @@ Note that after running one of above commands first time, new files might be gen
 * *yarn.lock*
 
 This is indented behavior - __remember to save these files in VCS__.
+
+## Screenshots
+
+As a build result, reports under directory *build/lighthouse* will be generated.
+
+Sample report below:
+
+![Lighthouse Report](docs/lighthouse-report.png)
 
 ## Building
 
