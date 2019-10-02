@@ -21,6 +21,7 @@ Suites need to be defined in file with following format:
   "suites": [
     {
       "name": "site.demo",
+      "default": true,
       "baseUrl": "http://demo.example.com",
       "paths": [
         "/en-us.html",
@@ -65,12 +66,14 @@ When using argument `--config-path` then it is also needed to have at least file
 
 ### Running
 
-Use command, to run Lighthouse CI by using:
+Underneath, Gradle Lighthouse Plugin is using running Lighthouse CI multiple times in case of test suites defined. 
 
-* default suite and its base URL: `sh gradlew lighthouseRun`,
-* only desired suite by name: `sh gradlew lighthouseRun -Plighthouse.suite=site.demo` (if suite by name not found, suite named `default` will be used),
-* only desired suite by base URL: `sh gradlew lighthouseRun -Plighthouse.baseUrl=http://example.com`,
-* any suite with any base URL: `sh gradlew lighthouseRun -Plighthouse.baseUrl=http://any-host.com -Plighthouse.suite=site.live` (base URL defined in suite will be overridden).
+Available options:
+
+* run default suite(s): `sh gradlew lighthouseRun`,
+* run only desired suite(s) by name pattern(s): `sh gradlew lighthouseRun -Plighthouse.suite=site.demo` (if suites by name not found, default suites will be used),
+* run only desired suite(s) by base URL: `sh gradlew lighthouseRun -Plighthouse.baseUrl=http://example.com` (if suites by name not found, default suites will be used),
+* run only desired suite(s) with customized base URL: `sh gradlew lighthouseRun -Plighthouse.baseUrl=http://any-host.com -Plighthouse.suite=site.live`.
 
 Note that after running one of above commands first time, new files might be generated:
 

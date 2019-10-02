@@ -21,8 +21,6 @@ class LighthouseExtension(val project: Project) {
         project.file("build/lighthouse/${it.suite.name}/${it.url.substringAfter("://").replace("/", "_")}")
     }
 
-    var workingDir = project.file(project.prop("lighthouse.workingDir") ?: "build/lighthouse")
-
     fun <T> runner(consumer: Runner.() -> T) = Runner(this).run(consumer)
 
     companion object {

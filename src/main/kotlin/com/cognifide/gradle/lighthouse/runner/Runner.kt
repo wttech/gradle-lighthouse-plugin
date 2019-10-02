@@ -1,5 +1,6 @@
 package com.cognifide.gradle.lighthouse.runner
 
+import com.cognifide.gradle.lighthouse.LighthouseException
 import com.cognifide.gradle.lighthouse.LighthouseExtension
 import com.cognifide.gradle.lighthouse.Utils
 import com.moowork.gradle.node.yarn.YarnExecRunner
@@ -19,14 +20,16 @@ class Runner(lighthouse: LighthouseExtension) {
 
     var baseUrl = lighthouse.baseUrl
 
-    var workingDir = lighthouse.workingDir
-
     fun runSuites() {
         when {
             !suiteName.isNullOrBlank() -> config.suites.filter { Utils.wildcardMatch(it.name, suiteName) }
             else -> config.suites.filter { it.baseUrl?.run { this == baseUrl } ?: false }
         }.ifEmpty {
-            config.suites.filter { it.name == "default" }
+            config.suites.filter { it.default }
+        }.ifEmpty {
+            throw LighthouseException("Cannot determine any Lighthouse test suites to run!\n" +
+                    "Consider setting default flags" +" for some suites for handling any base URL " +
+                    "or when skipping suite name parameter.")
         }.forEach { suite ->
             logger.info("Running Lighthouse Suite '${suite.name}'")
 
@@ -46,7 +49,7 @@ class Runner(lighthouse: LighthouseExtension) {
 
         reportDir.mkdirs()
         YarnExecRunner(project).apply {
-            workingDir = this@Runner.workingDir
+            workingDir = project.projectDir
             arguments = mutableListOf("lighthouse-ci", url, "--report=$reportDir", "--filename=$reportName") + extraArgs
             execute()
         }
