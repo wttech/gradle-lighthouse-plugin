@@ -10,6 +10,14 @@ Runs [Lighthouse](https://developers.google.com/web/tools/lighthouse) tests on m
 
 [![Lighthouse Logo](docs/lighthouse-logo.png)](https://developers.google.com/web/tools/lighthouse)
 
+## Installation
+
+```kotlin
+plugins {
+  id("com.cognifide.lighthouse") version "1.0.0"
+}
+```
+
 ## Configuration
 
 Plugin organizes multiple sites to be tested into suites. Any web page could have be checked with different threshold and Lighthouse configuration (e.g using [performance budgets](https://developers.google.com/web/tools/lighthouse/audits/budgets)).
