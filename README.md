@@ -74,7 +74,7 @@ When using argument `--config-path` then it is also needed to have at least file
 
 ## Running
 
-Underneath, Gradle Lighthouse Plugin is using running [Lighthouse CI](https://www.npmjs.com/package/lighthouse-ci) multiple times in case of test suites defined. 
+Underneath, Gradle Lighthouse Plugin is running [Lighthouse CI](https://www.npmjs.com/package/lighthouse-ci) multiple times in case of test suites defined (support for multiple paths under same base URL). 
 
 Available options:
 
