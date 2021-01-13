@@ -69,10 +69,10 @@ class LighthousePluginFunctionalTest {
                       ],
                       "args": [
                         "--config-path=lighthouse/config.json",
-                        "--performance=60",
-                        "--accessibility=70",
-                        "--best-practices=80",
-                        "--seo=80",
+                        "--performance=30",
+                        "--accessibility=30",
+                        "--best-practices=30",
+                        "--seo=30",
                         "--pwa=30"
                       ]
                     },
@@ -84,10 +84,10 @@ class LighthousePluginFunctionalTest {
                       ],
                       "args": [
                         "--config-path=lighthouse/config.json",
-                        "--performance=75",
-                        "--accessibility=60",
-                        "--best-practices=80",
-                        "--seo=60",
+                        "--performance=30",
+                        "--accessibility=30",
+                        "--best-practices=30",
+                        "--seo=30",
                         "--pwa=30"
                       ]
                     }
