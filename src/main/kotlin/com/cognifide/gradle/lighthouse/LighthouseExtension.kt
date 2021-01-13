@@ -9,13 +9,22 @@ import com.cognifide.gradle.lighthouse.Utils.prop
 
 class LighthouseExtension(val project: Project) {
 
-    var configFile = project.file(project.prop("lighthouse.configFile") ?: "lighthouse/suites.json")
+    val configFile = project.objects.fileProperty().apply {
+        set(project.layout.projectDirectory.file("lighthouse/suites.json"))
+        project.prop("lighthouse.configFile")?.let { set(project.file(it)) }
+    }
 
-    val config get() = Config.from(configFile)
+    val config = project.objects.property(Config::class.java).apply {
+        convention(configFile.map { Config.from(it.asFile) })
+    }
 
-    var suiteName = project.prop("lighthouse.suite")
+    val suiteName = project.objects.property(String::class.java).apply {
+        project.prop("lighthouse.suite")?.let { set(it) }
+    }
 
-    var baseUrl = project.prop("lighthouse.baseUrl")
+    val baseUrl = project.objects.property(String::class.java).apply {
+        project.prop("lighthouse.baseUrl")?.let { set(it) }
+    }
 
     var reportFileRule: (RunUnit) -> File = {
         project.file("build/lighthouse/${it.suite.name}/${it.url.substringAfter("://").replace("/", "_")}")

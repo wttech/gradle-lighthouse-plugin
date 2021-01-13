@@ -6,7 +6,7 @@ import org.gradle.api.Project
 
 object Utils {
 
-    fun Project.prop(name: String) = findProperty(name) as String?
+    fun Project.prop(name: String) = findProperty(name)?.toString()
 
     fun <T> fromJson(json: String, clazz: Class<T>): T {
         return ObjectMapper().readValue(json, clazz)

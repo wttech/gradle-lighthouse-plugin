@@ -27,7 +27,7 @@ open class LighthousePlugin : Plugin<Project> {
                         {
                           "license": "UNLICENSED",
                           "devDependencies": {
-                            "lighthouse-ci": "^1.10.0"
+                            "lighthouse-ci": "^1.12.0"
                           }
                         }
                     """.trimIndent())

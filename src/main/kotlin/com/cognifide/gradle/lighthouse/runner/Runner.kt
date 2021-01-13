@@ -12,13 +12,13 @@ class Runner(lighthouse: LighthouseExtension) {
 
     private var logger = project.logger
 
-    var config = lighthouse.config
+    var config = lighthouse.config.get()
+
+    var suiteName = lighthouse.suiteName.orNull
+
+    var baseUrl = lighthouse.baseUrl.orNull
 
     var reportFileRule = lighthouse.reportFileRule
-
-    var suiteName = lighthouse.suiteName
-
-    var baseUrl = lighthouse.baseUrl
 
     fun runSuites() {
         when {
