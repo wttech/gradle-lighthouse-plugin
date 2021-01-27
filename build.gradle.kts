@@ -89,8 +89,8 @@ gradlePlugin {
 }
 
 pluginBundle {
-    website = "https://github.com/Cognifide/gradle-lighthouse-plugin"
-    vcsUrl = "https://github.com/Cognifide/gradle-lighthouse-plugin.git"
+    website = "https://github.com/wttech/gradle-lighthouse-plugin"
+    vcsUrl = "https://github.com/wttech/gradle-lighthouse-plugin.git"
     description = "Gradle Lighthouse Plugin"
     tags = listOf("lighthouse", "performance", "test", "seo", "pwa")
 }
@@ -104,7 +104,7 @@ bintray {
         name = "gradle-lighthouse-plugin"
         userOrg = "cognifide"
         setLicenses("Apache-2.0")
-        vcsUrl = "https://github.com/Cognifide/gradle-lighthouse-plugin.git"
+        vcsUrl = "https://github.com/wttech/gradle-lighthouse-plugin.git"
         setLabels("lighthouse", "performance", "test", "seo", "pwa")
         with(version) {
             name = project.version.toString()
