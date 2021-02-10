@@ -27,7 +27,8 @@ class LighthouseExtension(val project: Project) {
     }
 
     var reportFileRule: (RunUnit) -> File = {
-        project.file("build/lighthouse/${it.suite.name}/${it.url.substringAfter("://").replace("/", "_")}")
+        val fileName = it.url.substringAfter("://").replace("/", "_").removeSuffix("_")
+        project.file("build/lighthouse/${it.suite.name}/$fileName.html")
     }
 
     fun <T> runner(consumer: Runner.() -> T) = Runner(this).run(consumer)
