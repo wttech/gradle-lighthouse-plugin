@@ -1,4 +1,4 @@
-[![Cognifide logo](docs/cognifide-logo.png)](http://cognifide.com)
+[![WTT logo](docs/wtt-logo.png)](https://www.wundermanthompson.com)
 
 [![Gradle Status](https://gradleupdate.appspot.com/Cognifide/gradle-lighthouse-plugin/status.svg?random=123)](https://gradleupdate.appspot.com/Cognifide/gradle-lighthouse-plugin/status)
 ![Travis Build](https://travis-ci.org/Cognifide/gradle-lighthouse-plugin.svg?branch=master)
@@ -101,7 +101,7 @@ Screenshot of sample report below:
 
 ## Building
 
-1. Clone this project using command `git clone https://github.com/Cognifide/gradle-lighthouse-plugin.git`
+1. Clone this project using command `git clone https://github.com/wttech/gradle-lighthouse-plugin.git`
 2. To build plugin, simply enter cloned directory run command: `gradlew`
 3. To debug built plugin:
     * Append to build command parameters `--no-daemon -Dorg.gradle.debug=true`
