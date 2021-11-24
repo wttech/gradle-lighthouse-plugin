@@ -3,7 +3,7 @@ package com.cognifide.gradle.lighthouse.runner
 import com.cognifide.gradle.lighthouse.LighthouseException
 import com.cognifide.gradle.lighthouse.LighthouseExtension
 import com.cognifide.gradle.lighthouse.Utils
-import com.moowork.gradle.node.yarn.YarnExecRunner
+import com.github.gradle.node.yarn.exec.YarnExecRunner
 import java.io.File
 
 class Runner(lighthouse: LighthouseExtension) {
@@ -50,7 +50,9 @@ class Runner(lighthouse: LighthouseExtension) {
         val reportName = reportFile.name
 
         reportDir.mkdirs()
-        YarnExecRunner(project).apply {
+
+        // TODO needs https://github.com/node-gradle/gradle-node-plugin/pull/202
+        project.objects.newInstance(YarnExecRunner::class.java).apply {
             workingDir = project.projectDir
             arguments = mutableListOf("lighthouse-ci", url, "--report=$reportDir", "--filename=$reportName") + extraArgs
             execute()
