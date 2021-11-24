@@ -7,7 +7,6 @@ plugins {
     id("org.jetbrains.kotlin.jvm")
     id("org.jetbrains.dokka")
     id("io.gitlab.arturbosch.detekt")
-    id("com.jfrog.bintray")
     id("net.researchgate.release")
 }
 
@@ -15,7 +14,7 @@ defaultTasks("build", "publishToMavenLocal")
 group = "com.cognifide.gradle"
 
 repositories {
-    jcenter()
+    mavenCentral()
     gradlePluginPortal()
 }
 
@@ -24,7 +23,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.8.8")
     implementation("commons-io:commons-io:2.6")
-    implementation("com.github.node-gradle:gradle-node-plugin:2.1.1")
+    implementation("com.github.node-gradle:gradle-node-plugin:3.1.1")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
@@ -63,7 +62,7 @@ tasks {
         testLogging.showStandardStreams = true
     }
     named("afterReleaseBuild") {
-        dependsOn("bintrayUpload", "publishPlugins")
+        dependsOn("publishPlugins")
     }
     named("updateVersion") {
         enabled = false
@@ -93,27 +92,6 @@ pluginBundle {
     vcsUrl = "https://github.com/wttech/gradle-lighthouse-plugin.git"
     description = "Gradle Lighthouse Plugin"
     tags = listOf("lighthouse", "performance", "test", "seo", "pwa")
-}
-
-bintray {
-    user = (project.findProperty("bintray.user") ?: System.getenv("BINTRAY_USER"))?.toString()
-    key = (project.findProperty("bintray.key") ?: System.getenv("BINTRAY_KEY"))?.toString()
-    setPublications("mavenJava")
-    with(pkg) {
-        repo = "maven-public"
-        name = "gradle-lighthouse-plugin"
-        userOrg = "cognifide"
-        setLicenses("Apache-2.0")
-        vcsUrl = "https://github.com/wttech/gradle-lighthouse-plugin.git"
-        setLabels("lighthouse", "performance", "test", "seo", "pwa")
-        with(version) {
-            name = project.version.toString()
-            desc = "${project.description} ${project.version}"
-            vcsTag = project.version.toString()
-        }
-    }
-    publish = (project.findProperty("bintray.publish") ?: "true").toString().toBoolean()
-    override = (project.findProperty("bintray.override") ?: "false").toString().toBoolean()
 }
 
 publishing {

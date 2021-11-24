@@ -1,8 +1,8 @@
 package com.cognifide.gradle.lighthouse
 
 import com.cognifide.gradle.lighthouse.tasks.LighthouseRun
-import com.moowork.gradle.node.NodeExtension
-import com.moowork.gradle.node.yarn.YarnInstallTask
+import com.github.gradle.node.NodeExtension
+import com.github.gradle.node.yarn.task.YarnInstallTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import java.io.File
@@ -15,13 +15,13 @@ open class LighthousePlugin : Plugin<Project> {
         val node = NodeExtension.get(project)
 
         node.apply {
-            version = "10.16.3"
-            yarnVersion = "1.19.0"
-            download = true
+            version.set("10.16.3")
+            yarnVersion.set("1.19.0")
+            download.set(true)
         }
 
         val yarnInstall = project.tasks.named(YarnInstallTask.NAME, YarnInstallTask::class.java) {
-            File(node.nodeModulesDir, "package.json").apply {
+            File(node.nodeProjectDir.get().asFile, "package.json").apply {
                 if (!exists()) {
                     writeText("""
                         {
